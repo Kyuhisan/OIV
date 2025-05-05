@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>SQL Injection</title>
+</head>
+<body>
+<h1>SQL Injection - Spring Boot</h1>
+<a href="/">Domov</a> |
+<a th:href="@{/vulnerable}">Ranljiv</a> |
+<a th:href="@{/secure}">Varen</a>
+
+<div th:if="${tab} == 'vulnerable'">
+    <h2>Ranljiv iskalnik</h2>
+    <form action="/vulnerable" method="post">
+        <input name="input" placeholder="Vnesi uporabniško ime">
+        <button type="submit">Išči</button>
+    </form>
+</div>
+
+<div th:if="${tab} == 'secure'">
+    <h2>Varen iskalnik</h2>
+    <form action="/secure" method="post">
+        <input name="input" placeholder="Vnesi uporabniško ime">
+        <button type="submit">Išči</button>
+    </form>
+</div>
+
+<div th:if="${results != null}">
+    <h3>Rezultati:</h3>
+    <ul>
+        <li th:each="user : ${results}"
+            th:text="${user.username + ' - ' + user.password}">Uporabnik</li>
+    </ul>
+</div>
+</body>
+</html>
